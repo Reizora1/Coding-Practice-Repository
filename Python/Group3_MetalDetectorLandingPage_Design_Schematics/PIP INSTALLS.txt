@@ -1,0 +1,25 @@
+PIP INSTALLS:
+pip install firebase_admin
+pip install imageio
+-came with pillow, numpy, imageio
+pip install imageio[pyav]
+pip install customtkinter
+
+*do "cd 'drive:'/'folder_path'" first before running.
+
+===================================================================================
+If you are encountering the error 'pip' is not recognized as an internal or external command, operable program or batch file, it indicates that the pip executable is not in your system's PATH. Here are the steps you can take to resolve this issue:
+
+Locate the Python Scripts Directory:
+The pip executable is usually located in the Scripts directory within the Python installation directory. The path might look like this: C:\Path\To\Your\Python\Scripts (on Windows). Find the full path to this directory.
+
+Add Python Scripts Directory to PATH:
+Once you've located the Scripts directory, you need to add it to your system's PATH environment variable. Follow these steps:
+
+Open the Start menu and search for "Environment Variables" or "Edit the system environment variables."
+Click on "Environment Variables..."
+Under "System variables," find and select the "Path" variable, then click "Edit..."
+Click "New" and add the full path to the Scripts directory.
+Click "OK" to close the windows.
+Restart the Command Prompt or PowerShell:
+Close and reopen your command prompt or PowerShell window to ensure that the changes to the PATH variable take effect.

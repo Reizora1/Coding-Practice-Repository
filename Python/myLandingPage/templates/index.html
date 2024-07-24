@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta tags, title, and external CSS links go here -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>Lauglaug Rentals</title>
+</head>
+
+<body>
+    <header>
+        <a href="#" class="logo"><span>LAUGLAUG </span><span>ROOM RENTALS</span></a>
+    </header>
+
+    <section class="home" id="home">
+        <div class="Content">
+            <h3>Looking for a place to stay?</h3>
+            <p>Find us at Dorantha's Drive, Pajac-Maribago Road,</p>
+            <p>Pajac, Lapu-Lapu City, Cebu</p>
+            <a href="{{ url_for('booking') }}" class="btn">
+                <button id="myBtn" class="btn">
+                    <span class="btn-text-one">Book now!</span>
+                    <span class="btn-text-two">Proceed to booking</span>
+                </button>
+            </a>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; Lauglaug Rentals</p>
+    </footer>
+    
+</body>
+</html>

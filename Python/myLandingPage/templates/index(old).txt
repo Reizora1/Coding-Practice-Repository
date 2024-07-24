@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>Landing Page</title>
+</head>
+
+<header>
+	<a href="#" class="logo"><span>LAUGLAUG </span><span>ROOM RENTALS</span></a>
+</header>
+
+<section class="home" id="home">
+	<div class="Content">
+		<h3>Looking for a place to stay?</h3>
+		<p>Find us at Dorantha's Drive, Pajac-Maribago Road,</p>
+		<p>Pajac, Lapu-Lapu City, Cebu</p>
+		<button id="myBtn" class="btn">
+			<span class="btn-text-one">Book now!</span>
+			<span class="btn-text-two">Proceed to booking</span>
+		</button>
+	</div>
+</section>
+
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Form Title</h2>
+        <form>
+            <!-- Your form fields go here -->
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+            <!-- Add more form fields as needed -->
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</div>
+
+<footer>
+	<p>&copy; Lauglaug Rentals</p>
+</footer>
+
+<body>
+</body>
+</html>

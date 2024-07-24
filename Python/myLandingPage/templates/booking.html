@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta tags, title, and external CSS links go here -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>Lauglaug Rentals</title>
+</head>
+
+<body>
+    <header>
+        <a href="{{ url_for('index') }}" class="logo"><span>LAUGLAUG </span><span>ROOM RENTALS</span></a>
+    </header>
+
+    <section class="home1" id="home1">
+        <div class="form-container">
+            <form class="form">
+                <p class="title">Rental Form</p>
+                <p class="message">Please enter your personal details in the form.</p>
+                    <div class="flex">
+                    <label>
+                        <input required="" placeholder="" type="text" class="input">
+                        <span>Firstname</span>
+                    </label>
+            
+                    <label>
+                        <input required="" placeholder="" type="text" class="input">
+                        <span>Lastname</span>
+                    </label>
+                </div>  
+                        
+                <label>
+                    <input required="" placeholder="" type="email" class="input">
+                    <span>Email</span>
+                </label> 
+                    
+                <label>
+                    <input required="" placeholder="" type="number" class="input">
+                    <span>Mobile No.</span>
+                </label>
+                <label>
+                    <input required="" placeholder="" type="date" class="input">
+                </label>
+                <button>
+                    <div class="svg-wrapper-1">
+                      <div class="svg-wrapper">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                          <path fill="none" d="M0 0h24v24H0z"></path>
+                          <path fill="currentColor" d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z"></path>
+                        </svg>
+                      </div>
+                    </div>
+                    <span>Submit</span>
+                  </button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; Lauglaug Rentals</p>
+    </footer>
+    
+</body>
+</html>
