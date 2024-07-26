@@ -3,7 +3,7 @@ public class Main{
     public static void main(String[] args){
         System.out.println("hello world");
 
-        int arr[] = {2, 3, 7, 1, 4, 9, 8, 10, 6, 5};
+        int arr[] = {3, 2, 5, 0, 1, 8, 7, 6, 9, 4};
         int start = 0;
         int end = arr.length - 1;
 
