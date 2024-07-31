@@ -1,5 +1,5 @@
 //quicksort practice
-public class Main{
+public class quicksort{
     public static void main(String[] args){
         System.out.println("hello world");
 
