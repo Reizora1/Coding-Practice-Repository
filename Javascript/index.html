@@ -25,7 +25,7 @@
     <label>Enter any number greater than 1:</label>
     <input type="number" id="in2"><br>
     <p id="p3" class="p2">0</p>
-    <button id="btn3" style="margin-left: 110px ;">ROLL</button><br><br>
+    <button id="btn3" style="margin-left: 110px ;">GENERATE</button><br><br>
     
     <label for="checkbox">CHECKBOX:</label><br>
     <input type="checkbox" id="chckBox"><br>
@@ -38,7 +38,30 @@
     <label for="in3" id="lbl1">NUMBER GUESSING GAME FROM 1 - 100:</label><br>
     <input type="number" id="in3"><br>
     <button id="btn4">SUBMIT</button>
-    <button id="btn5" onclick="iGotClicked()">RESET</button>
+    <button id="btn5" onclick="iGotClicked()">RESET</button><br><br>
+
+    <label for="diceInput">DICE ROLLER</label><br>
+    <input type="number" id="diceInput" value="1" min="1"><br>
+    <button id="btn6">ROLL</button>
+    <div id="diceTxt"></div>
+    <div id="diceImg"></div><br><br>
+
+    <label>RANDOM PASSWORD GENERATOR</label>
+    <p id="displayPass"></p>
+    <label for="passLength">Enter desired password length:</label>
+    <input type="number"  id="passLength"><br>
+
+    <div>
+        <input type="checkbox" id="incUp">
+        <label for="incuP"> - Include Uppercase characters?</label><br>
+        <input type="checkbox" id="incLow">
+        <label for="incLow"> - Include lowercase characters?</label><br>
+        <input type="checkbox" id="incNum">
+        <label for="incNum"> - Include numbers?</label><br>
+        <input type="checkbox" id="incSpe">
+        <label for="incSpe"> - Include special characters?</label><br>
+    </div>
+    <button id="btn7">GENERATE</button>
     
     <script src="javascriptPrac.js"></script>
 </body>

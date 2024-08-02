@@ -4,6 +4,7 @@ console.log("ELEMENTARY MY DEAR");
 //alert("Initializing . . . \nClick OK!");
 
 //LOREM IPSUM SECTION
+console.log("LOREM IPSUM SECTION:");
 let loop = 0;
 const btn1 = document.getElementById("btn1");
 btn1.addEventListener("click", function(){
@@ -21,6 +22,7 @@ btn1.addEventListener("click", function(){
 
 
 //USER INPUT SECTION
+console.log("USERINPUT SECTION:");
 let userName;
 const header1 = document.getElementById("h1");
 const btn2 = document.getElementById("btn2");
@@ -37,6 +39,7 @@ btn2.onclick = function(){
 
 
 //COUNTER SECTION
+console.log("COUNTER SECTION:");
 let num;
 const decBtn = document.getElementById("dec");
 const resBtn = document.getElementById("res");
@@ -70,6 +73,7 @@ incBtn.onclick = function() {
 //console.log(`The random number from 0 - 10 is: ${randomNum}`);
 
 //RNG SECTION
+console.log("RNG SECTION:");
 const p3 = document.getElementById("p3");
 const in2 = document.getElementById("in2");
 const btn3 = document.getElementById("btn3");
@@ -91,6 +95,7 @@ btn3.onclick = function() {
 
 
 //CHECKBOX AND RADIO BUTTONS SECTION
+console.log("CHECKBOX & RADIO BUTTON SECTION:");
 const p4 = document.getElementById("p4");
 const chckBox = document.getElementById("chckBox");
 const rad1 = document.getElementById("rad1");
@@ -127,6 +132,7 @@ rad3.onclick = function(){
 
 
 //STRING METHODS SECTION
+console.log("STRING METHODS SECTION:");
 let authorName = "   Jefter   "
 console.log(authorName);
 console.log(authorName.trim());
@@ -155,6 +161,7 @@ header1.textContent = setName;*/
 
 
 //NUMBER GUESSING SECTION
+console.log("NUMBER GUESSING GAME SECTION:");
 const MIN = 1;
 const MAX = 100;
 let answer = Math.floor(Math.random() * (MAX - MIN + 1));
@@ -198,6 +205,7 @@ function iGotClicked(){
 
 
 //SPREAD OPERATORS SECTION = (...)
+console.log("SPREAD OPERATORS SECTION:");
 let knightClass = ["Saber", "Lancer", "Archer"];
 let calvaryClass = ["Rider", "Caster", "Assassin", "Berserker"];
 let servants = [...knightClass, ...calvaryClass];
@@ -207,6 +215,7 @@ console.log(...servants);
 
 
 //REST PARAMETERS SECTION = (function(...rest)) *allows for variable number of args*
+console.log("REST PARAMETERS SECTION:");
 function cabinet(...tools){
     console.log(...tools);
     console.log(tools.length);
@@ -229,4 +238,80 @@ let avg = getSum(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 console.log(`Sum is: ${sum}`);
 console.log(`Avg is: ${avg}`);
 
-//ATTEMPT TO DO DICEROLLER PROGRAM HERE WITH LESS TUTORIAL...
+//DICE ROLLER SECTION
+console.log("DICE ROLL SECTION:");
+const lowestDice = 1;
+const highestDice = 6;
+const btn6 = document.getElementById("btn6");
+const numInput = document.getElementById("diceInput");
+const diceImage = document.getElementById("diceImg");
+const diceTxt = document.getElementById("diceTxt");
+btn6.onclick = function(){
+    let numOfDice = Number(numInput.value);
+    let diceRolls = [];
+    let diceImages = [];
+    if(numOfDice <= 0){
+        alert("Enter a valid number of dice/s!");
+        return;
+    }
+    console.log(`Number of dice/s roled: ${numOfDice}`);
+
+    for(let i = 0; i < numOfDice; i++){
+        diceRolls[i] = Math.floor(Math.random() * 6) + 1;
+        diceImages[i] = `<img src="images/${diceRolls[i]}.png" alt="Dice: ${diceRolls[i]}">\n`;
+    }
+    diceTxt.innerHTML = diceRolls.join(' ');
+    diceImage.innerHTML = diceImages.join('');
+    console.log(diceRolls);
+}
+
+//RANDOM PASSWORD GENERATOR SECTION
+console.log("RANDOM PASSWORD GENERATOR SECTION:");
+const pLength = document.getElementById("passLength");
+const btn7 = document.getElementById("btn7");
+const displayPass = document.getElementById("displayPass");
+const cb1 = document.getElementById("incUp");
+const cb2 = document.getElementById("incLow");
+const cb3 = document.getElementById("incNum");
+const cb4 = document.getElementById("incSpe");
+
+let length = 0;
+let upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+let lowerCase = upperCase.toLowerCase();
+let pNumbers = "1234567890";
+let specialChars = "!@#$%^&*()_+-=";
+let allowedChars = "";
+let generatedPass = "";
+
+btn7.onclick = function(){
+    length = pLength.value;
+    if(length <= 0 || length < 8){
+        return alert("Please enter a value greater than 8!");
+    }
+
+    allowedChars += cb1.checked ? upperCase : "";
+    allowedChars += cb2.checked ? lowerCase : "";
+    allowedChars += cb3.checked ? pNumbers : "";
+    allowedChars += cb4.checked ? specialChars : "";
+
+    for(let i = 0; i <= length; i++){
+        const randomIndex = Math.floor(Math.random() * allowedChars.length);
+        generatedPass += allowedChars[randomIndex];
+    }
+    displayPass.textContent = `Your generated password is: ${generatedPass}`;
+    generatedPass = "";
+    allowedChars = "";
+}
+
+//FOREACH SECTION
+console.log("FOREACH SECTION:");
+let arr = [1, 2, 3, 4, 5];
+arr.forEach(double);
+arr.forEach(displayConsole);
+function double(element, index, array){
+    //a[i] = e * 2;
+    array[index] *= 2;
+}
+function displayConsole(callback){
+    console.log(callback);
+}
