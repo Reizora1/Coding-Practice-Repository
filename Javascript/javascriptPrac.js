@@ -298,7 +298,7 @@ btn7.onclick = function(){
         const randomIndex = Math.floor(Math.random() * allowedChars.length);
         generatedPass += allowedChars[randomIndex];
     }
-    displayPass.textContent = `Your generated password is: ${generatedPass}`;
+    (allowedChars == "") ? alert("Please select an option!") : displayPass.textContent = `Your generated password is: ${generatedPass}`;
     generatedPass = "";
     allowedChars = "";
 }
@@ -315,3 +315,191 @@ function double(element, index, array){
 function displayConsole(callback){
     console.log(callback);
 }
+
+
+//IMPLEMENT QUICKSORT ALGORITHM BASED ON USER INPUT SECTION.
+const btn8 = document.getElementById("btn8");
+const btn9 = document.getElementById("btn9");
+const btn10 = document.getElementById("btn10");
+const userInput = document.getElementById("userInput");
+const displaySorted = document.getElementById("displaySorted");
+const userInputDisplay = document.getElementById("userInputDisplay");
+
+let toSort = [];
+const start = 0;
+let end = 0;
+
+userInput.addEventListener("keypress", (event) => {
+    if(event.key === "Enter"){
+        event.preventDefault();
+        btn8.click();
+    }
+})
+btn8.onclick = function(){
+    if(userInput.value == ""){
+        alert("You must enter a number!");
+        return;
+    }
+    toSort.push(Number(userInput.value));
+    end = toSort.length - 1;
+    userInputDisplay.textContent = `You've entered: ${toSort.toString().replaceAll(",", " ")}`;
+    userInput.value = "";
+    console.log(toSort);
+}
+btn9.onclick = function(){
+    quickSort(toSort, start, end);
+    displaySorted.textContent = `Sorted inputs: ${toSort.toString().replaceAll(",", " ").trim()}`;
+}
+btn10.onclick = function(){
+    userInput.value = "";
+    userInputDisplay.textContent = "";
+    displaySorted.textContent = "";
+    toSort = [];
+    end = 0;
+}
+//QUICKSORT ALGORITHM
+function quickSort(arr, start, end){
+    if(end <= start) return;
+
+    let pivotIndex = partition(arr, start, end);
+    quickSort(arr, start, pivotIndex - 1);
+    quickSort(arr, pivotIndex + 1, end);
+}
+function partition(arr, start, end){
+    let pivot = arr[end];
+    let i = start - 1;
+    let temp = 0;
+    for(let j = start; j < end; j++){
+        if(arr[j] < pivot){
+            i++;
+            temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
+        }
+    }
+    i++;
+    temp = arr[i];
+    arr[i] = arr[end];
+    arr[end] = temp;
+    return i;
+}
+
+
+//CALLBACKS AND OTHER METHODS THAT INVOLVES CALLBACKS SECTION
+console.log("CALLBACKS SECTION:");
+//FILTER METHOD.
+const ages = [23, 13, 15, 18, 20];
+//THIS USES FUNCTION EXPRESSION AS THE PARAMETER FOR THE .FILTER() METHOD.
+/*const adults = ages.filter(function(element, index){
+    console.log(`current index: ${index}`);
+    return element >= 18;
+})*/
+//THIS USES AN ARROW FUNCTION AS THE PARAMETER FOR THE .FILTER() METHOD.
+const adults = ages.filter((elements) => {
+    return elements >= 18;
+})
+console.log(adults.toString());
+
+//MAP METHOD.
+const letters = ["d", "a", "e", "b", "c"];
+const displayLetters = letters.map(display);
+function display(elements){
+    const caps = elements.toUpperCase();
+    console.log(caps);
+}
+
+//REDUCE METHOD.
+const scores = [13, 10, 25, 20, 17];
+const toSum = scores.reduce((accumulator, elements) => {
+    return Math.max(accumulator, elements);
+})
+console.log(toSum);
+
+
+//OBJECTS
+console.log("OBJECTS SECTION:");
+const hsrChar = {
+    name: "Acheron",
+    trueName: "Raiden Bosenmori Mei",
+    path: "Nihility",
+    level: 80,
+    faction: "Self Annihilator",
+    aeon: "IX",
+    skill: "Octobolt Flash!",
+    ultimate: "Slashed Dream Cries in Red",
+    useSkill: function(targets) {console.log(`${this.name} has used her skill ${this.skill} against ${targets} targets!`)},
+    useUltimate: function(targets) {console.log(`${this.name} activated her ultimate skill, ${this.ultimate} to kill ${targets}.`)}
+}
+hsrChar.useSkill(3);
+hsrChar.useUltimate(5);
+
+
+//CONSTRUCTORS
+console.log("CONSTRUCTORS SECTION:");
+function Vehicle(type, brand, wheels, year, color){
+    this.type = type,
+    this.brand = brand,
+    this.wheels = wheels,
+    this.color = color
+}
+const bicycle = new Vehicle("2-Wheeler", "Santa Fe", 2, 2024, "White");
+const car = new Vehicle("Sedan", "Honda", 4, 2023, "Red");
+console.log(car);
+console.log(bicycle);
+
+
+//CLASSES
+console.log("CLASSES SECTION:");
+class Item{
+    constructor(name, rarity){
+        this.name = name,
+        this.rarity = rarity
+    }
+
+    displayItem(){
+        console.log(`The item you have is: ${this.name}.\nIt has a ${this.rarity}-star rarity.`);
+    }
+}
+const sword = new Item("Necrotic Sword of Doom", 5);
+const axe = new Item("Blinding Light of Destiny", 5);
+axe.displayItem();
+sword.displayItem();
+
+
+//INHERITANCE AND CONSTRUCTORS
+console.log("INHERITANCE AND CONSTRUCTORS SECTION:");
+class Planets{
+    constructor(isGas, placement){
+        this.isGas = isGas,
+        this.placement = placement
+    }
+    temps(temps){
+        console.log(`This planet's average temperature is ${temps}°C.`)
+    }
+}
+class Earth extends Planets{
+    constructor(isGas, temps, placement){
+        super(isGas, placement),
+        this.temps = temps
+    }
+    rotation(){
+        super.temps(this.temps);
+    }
+}
+class Jupiter extends Planets{
+    constructor(isGas, temps, placement){
+        super(isGas, placement),
+        this.temps = temps
+    }
+    rotation(){
+        super.temps(this.temps);
+    }
+}
+const earth = new Earth(false, 27, "third");
+console.log(`Is the planet a gas planet? ${earth.isGas}`);
+console.log(`This planet is the ${earth.placement} planet from the Sun.`);
+earth.rotation();
+const jupiter = new Jupiter(true, -110, "fifth");
+console.log(`Is the planet a gas planet? ${jupiter.isGas}`);
+console.log(`This planet is the ${jupiter.placement} planet from the Sun.`);
+jupiter.rotation();
