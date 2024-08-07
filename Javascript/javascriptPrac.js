@@ -40,21 +40,21 @@ btn2.onclick = function(){
 
 //COUNTER SECTION
 console.log("COUNTER SECTION:");
-let num;
 const decBtn = document.getElementById("dec");
 const resBtn = document.getElementById("res");
 const incBtn = document.getElementById("inc");
 const p2 = document.getElementById("p2");
-num = Number(p2.textContent);
-decBtn.onclick = function() {
-    /*if(num == 0){
-        alert("Cannot decrease the value anymore!");
-    }
-    else{
-        num-=1;
-        p2.textContent = num;
-    }*/
-    (num == 0) ? alert("Cannot decrease the value anymore!") : num-=1; p2.textContent = num;
+//let num;
+//num = Number(p2.textContent);
+/*decBtn.onclick = function() {
+    //if(num == 0){
+    //    alert("Cannot decrease the value anymore!");
+    //}
+    //else{
+    //    num-=1;
+    //    p2.textContent = num;
+    //}
+    //(num == 0) ? alert("Cannot decrease the value anymore!") : num-=1; p2.textContent = num;
     //num-=1;
     //p2.textContent = num;
 }
@@ -65,7 +65,37 @@ resBtn.onclick = function() {
 incBtn.onclick = function() {
     num+=1;
     p2.textContent = num;
+}*/
+//CLOSURE IMPLEMENTATION OF THE COUNTER TO SECURE THE NUM VARIABLE.
+function counter(){
+    let num;
+    num = Number(p2.textContent);
+    function decrease(){
+        (num == 0) ? alert("Cannot decrease the value anymore!") : num-=1; p2.textContent = num;
+        p2.textContent = num;
+    }
+    function increase(){
+        num+=1;
+        p2.textContent = num;
+    }
+    function reset(){
+        num = 0;
+        p2.textContent = num;
+    }
+    return{decrease, increase, reset, num};
 }
+const clicked = counter(); //OBJECT CREATION WITH THE RETURN VALUE OF THE COUNTER() AS THE OBJECT FOR CLICKED.
+decBtn.onclick = function() {
+    clicked.decrease();
+    console.log(clicked.num);
+}
+resBtn.onclick = function() {
+    clicked.reset();
+}
+incBtn.onclick = function() {
+    clicked.increase();
+}
+
 
 //let x = 3.49;
 //console.log(Math.round(x));
@@ -209,8 +239,8 @@ console.log("SPREAD OPERATORS SECTION:");
 let knightClass = ["Saber", "Lancer", "Archer"];
 let calvaryClass = ["Rider", "Caster", "Assassin", "Berserker"];
 let servants = [...knightClass, ...calvaryClass];
-console.log(knightClass);
-console.log(calvaryClass);
+console.log(...knightClass);
+console.log(...calvaryClass);
 console.log(...servants);
 
 
@@ -372,15 +402,17 @@ function partition(arr, start, end){
     for(let j = start; j < end; j++){
         if(arr[j] < pivot){
             i++;
-            temp = arr[i];
+            /*temp = arr[i];
             arr[i] = arr[j];
-            arr[j] = temp;
+            arr[j] = temp;*/
+            [arr[i], arr[j]] = [arr[j], arr[i]]; //SWAPPING OF ARRAY VALUES USING DESTRUCTURING.
         }
     }
     i++;
-    temp = arr[i];
+    /*temp = arr[i];
     arr[i] = arr[end];
-    arr[end] = temp;
+    arr[end] = temp;*/
+    [arr[i], arr[end]] = [arr[end], arr[i]]; //SWAPPING OF ARRAY VALUES USING DESTRUCTURING.
     return i;
 }
 
@@ -401,19 +433,21 @@ const adults = ages.filter((elements) => {
 console.log(adults.toString());
 
 //MAP METHOD.
-const letters = ["d", "a", "e", "b", "c"];
+const letters = ["de", "ab", "ef", "bc", "cd"];
 const displayLetters = letters.map(display);
 function display(elements){
     const caps = elements.toUpperCase();
     console.log(caps);
+    return elements.toUpperCase().slice(1);
 }
+console.log(displayLetters);
 
 //REDUCE METHOD.
 const scores = [13, 10, 25, 20, 17];
-const toSum = scores.reduce((accumulator, elements) => {
+const maxNum = scores.reduce((accumulator, elements) => {
     return Math.max(accumulator, elements);
 })
-console.log(toSum);
+console.log(maxNum);
 
 
 //OBJECTS
@@ -424,7 +458,7 @@ const hsrChar = {
     path: "Nihility",
     level: 80,
     faction: "Self Annihilator",
-    aeon: "IX",
+    eidolon: 2,
     skill: "Octobolt Flash!",
     ultimate: "Slashed Dream Cries in Red",
     useSkill: function(targets) {console.log(`${this.name} has used her skill ${this.skill} against ${targets} targets!`)},
@@ -503,3 +537,50 @@ const jupiter = new Jupiter(true, -110, "fifth");
 console.log(`Is the planet a gas planet? ${jupiter.isGas}`);
 console.log(`This planet is the ${jupiter.placement} planet from the Sun.`);
 jupiter.rotation();
+
+
+//DESTRUCTURING SECTION
+console.log("DESTRUCTURING SECTION:");
+const games = {
+    fps: "CSGO",
+    turnBased: "HSR",
+    strategy: "Clash of Clans",
+    battleRoyale: "PUBG",
+    horror: "Outlast",
+    openWorld: "Genshin"
+}
+const {f1, t1, s1 ,b1, h1, openWorld} = games;
+console.log(f1);// => RESULTS TO UNDEFINED BECAUSE THERE IS NO f1 property in the object.
+console.log(openWorld);
+//CODE SNIPPETS BELOW ARE IMPLEMENTATIONS OF DESTRUCTURING IF THE PROPERTIES ARE NOT REVEALED.
+const arrTest = Object.entries(games).map(([key, value]) => {
+    console.log(`${key}: ${value}`);
+    return key;
+});
+const arrTest1 = Object.entries(games).map(([key, value]) => {
+    return value;
+});
+console.log(arrTest);
+console.log(arrTest1);
+
+
+//SORT SECTION
+const genshinChar = [
+                    {name: "Furina", element: "Hydro", lvl: 85},
+                    {name: "Clorinde", element: "Electro", lvl: 90},
+                    {name: "Nahida", element: "Dendro", lvl: 80}
+]
+//genshinChar.sort((a, b) => a.name.localeCompare(b.name));
+genshinChar.sort((a, b) => a.lvl-b.lvl);
+console.log(genshinChar);
+
+//CLOSURE SECTION
+console.log("CLOSURE SECTION:");
+function outer(){
+    let say = "Hello World!";
+    function inner(){
+        console.log(say);
+    }
+    inner();
+}
+outer();
