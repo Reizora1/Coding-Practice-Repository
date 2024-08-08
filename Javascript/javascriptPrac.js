@@ -574,6 +574,7 @@ const genshinChar = [
 genshinChar.sort((a, b) => a.lvl-b.lvl);
 console.log(genshinChar);
 
+
 //CLOSURE SECTION
 console.log("CLOSURE SECTION:");
 function outer(){
@@ -584,3 +585,20 @@ function outer(){
     inner();
 }
 outer();
+
+
+//CLOCK IMPLEMENTATION SECTION
+const clock = document.getElementById("clock");
+function updateTime(){
+    let now = new Date();
+    let hour = now.getHours();
+    let mins = now.getMinutes().toString().padStart(2, 0);
+    let secs = now.getSeconds().toString().padStart(2, 0);
+    let meridem = (hour >= 12) ? "P.M." : "A.M.";
+    let mHour = (hour > 12) ? hour % 12 : hour;
+    mHour = mHour.toString().padStart(2, 0);
+    clock.textContent = `${mHour}:${mins}:${secs} ${meridem}`;
+    //console.log(`${hour} + ${mins} + ${secs}`);
+}
+updateTime();
+setInterval(updateTime, 1000);
