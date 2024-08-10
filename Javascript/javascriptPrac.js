@@ -82,12 +82,11 @@ function counter(){
         num = 0;
         p2.textContent = num;
     }
-    return{decrease, increase, reset, num};
+    return{decrease, increase, reset};
 }
 const clicked = counter(); //OBJECT CREATION WITH THE RETURN VALUE OF THE COUNTER() AS THE OBJECT FOR CLICKED.
 decBtn.onclick = function() {
     clicked.decrease();
-    console.log(clicked.num);
 }
 resBtn.onclick = function() {
     clicked.reset();
@@ -354,7 +353,6 @@ const btn10 = document.getElementById("btn10");
 const userInput = document.getElementById("userInput");
 const displaySorted = document.getElementById("displaySorted");
 const userInputDisplay = document.getElementById("userInputDisplay");
-
 let toSort = [];
 const start = 0;
 let end = 0;
@@ -435,10 +433,10 @@ console.log(adults.toString());
 //MAP METHOD.
 const letters = ["de", "ab", "ef", "bc", "cd"];
 const displayLetters = letters.map(display);
-function display(elements){
-    const caps = elements.toUpperCase();
+function display(element){
+    const caps = element.toUpperCase();
     console.log(caps);
-    return elements.toUpperCase().slice(1);
+    return element.toUpperCase().slice(1);
 }
 console.log(displayLetters);
 
@@ -589,16 +587,98 @@ outer();
 
 //CLOCK IMPLEMENTATION SECTION
 const clock = document.getElementById("clock");
+const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 function updateTime(){
-    let now = new Date();
+    const now = new Date();
+
+    let month = (now.getMonth() + 1).toString().padStart(2, 0);
+    let date = now.getDate().toString().padStart(2, 0);
+    let year = now.getFullYear();
+    let day = days[now.getDay()]
+
     let hour = now.getHours();
     let mins = now.getMinutes().toString().padStart(2, 0);
     let secs = now.getSeconds().toString().padStart(2, 0);
+
     let meridem = (hour >= 12) ? "P.M." : "A.M.";
-    let mHour = (hour > 12) ? hour % 12 : hour;
-    mHour = mHour.toString().padStart(2, 0);
-    clock.textContent = `${mHour}:${mins}:${secs} ${meridem}`;
-    //console.log(`${hour} + ${mins} + ${secs}`);
+    let mHour = (hour > 12) ? (hour % 12).toString().padStart(2, 0) : (hour != 0) ? hour.toString().padStart(2, 0) : hour = 12;
+    //mHour = mHour.toString().padStart(2, 0);
+    clock.textContent = `${year}-${month}-${date}, ${day} - ${mHour}:${mins}:${secs} ${meridem}`;
 }
 updateTime();
 setInterval(updateTime, 1000);
+
+
+//STOPWATCH IMPLEMENTATION
+let timer = null;
+let startTime = 0;
+let elapsedTime = 0;
+let isRunning = false;
+let lapTime = [];
+const stopWatch = document.getElementById("stopwatch");
+const lapDisp = document.getElementById("lap");
+const startBtn = document.getElementById("startBtn");
+const stopBtn = document.getElementById("stopBtn");
+const resetBtn = document.getElementById("resetBtn");
+const lapBtn = document.getElementById("lapBtn");
+startBtn.onclick = function(){
+    if(!isRunning){
+        startTime = Date.now() - elapsedTime;
+        timer = setInterval(update, 10);
+        isRunning = true;
+    }
+    update();
+}
+stopBtn.onclick = function(){
+    if(isRunning){
+        clearInterval(timer);
+        elapsedTime = Date.now() - startTime;
+        isRunning = false;
+    }
+}
+resetBtn.onclick = function(){
+    clearInterval(timer);
+    startTime = 0;
+    elapsedTime = 0;
+    isRunning = false;
+    stopWatch.textContent = "00:00:00:00";
+    lapTime = [];
+    lapDisp.textContent = "";
+}
+lapBtn.onclick = function(){
+    if(isRunning){
+        elapsedTime = Date.now() - startTime;
+        let hours =  (Math.floor(elapsedTime / (1000 * 60 * 60))).toString().padStart(2, 0);
+        let mins = (Math.floor(elapsedTime / (1000 * 60) % 60)).toString().padStart(2, 0);
+        let seconds = (Math.floor(elapsedTime / 1000 % 60)).toString().padStart(2, 0);
+        let millis = (Math.floor(elapsedTime % 1000 / 10)).toString().padStart(2, 0);
+        let lapString = `${hours}:${mins}:${seconds}:${millis}`;
+        lapTime.push(lapString );
+        lapDisp.textContent = `|| ${lapTime.join(` || `)} ||`;
+    }
+}
+function update(){
+    const currentTime = Date.now();
+    elapsedTime = currentTime - startTime;
+    let hours =  (Math.floor(elapsedTime / (1000 * 60 * 60))).toString().padStart(2, 0);
+    let mins = (Math.floor(elapsedTime / (1000 * 60) % 60)).toString().padStart(2, 0);
+    let seconds = (Math.floor(elapsedTime / 1000 % 60)).toString().padStart(2, 0);
+    let millis = (Math.floor(elapsedTime % 1000 / 10)).toString().padStart(2, 0);
+    let stopWatchString = `${hours}:${mins}:${seconds}:${millis}`;
+    stopWatch.textContent = stopWatchString;
+    //console.log(`${hours}:${mins}:${seconds}:${millis}`);
+}
+
+
+//ASYNC AND SYNC IMPLEMENTATION
+console.log("ASYNC AND SYNC CODES SECTION:");
+function toCall(callback){
+    setTimeout(() => {console.log("First call!"); callback();}, 3000);
+}
+function toCallback(){
+    console.log("The succeeding calls will now be executed!");
+    setTimeout(() => console.log("Second call!"), 2000);
+    setTimeout(() => console.log("Third call!"), 3000);
+    setTimeout(() => console.log("Fourth call!"), 4000);
+}
+toCall(toCallback);

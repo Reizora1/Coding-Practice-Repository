@@ -43,3 +43,34 @@ body{
     font-weight: bold;
     margin: 10px;
 }
+
+#stopwatch-container{
+    display: flex;
+    max-width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+    align-items: center;
+    border: solid;
+    border-width: 5px;
+    border-radius: 50px;
+    border-color: aqua;
+    background-color:dodgerblue;
+}
+
+#stopwatch{
+    font-family: monospace;
+    font-size: 2.5rem;
+    text-align: center;
+    font-weight: bold;
+    margin: 10px;
+}
+
+#stopwatchBtns{
+    display: flex;
+    max-width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+    align-items: center;
+}
