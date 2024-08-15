@@ -7,7 +7,9 @@ console.log("ELEMENTARY MY DEAR");
 console.log("LOREM IPSUM SECTION:");
 let loop = 0;
 const btn1 = document.getElementById("btn1");
-btn1.addEventListener("click", function(){
+btn1.addEventListener("click", function(event){
+    console.log(event);
+    event.target.textContent = "EH?";
     if(loop == 0){
         document.getElementById("p1").textContent = "Hi! My Name is Jefter.";
         loop++;
@@ -357,7 +359,7 @@ let toSort = [];
 const start = 0;
 let end = 0;
 
-userInput.addEventListener("keypress", (event) => {
+userInput.addEventListener("keyup", (event) => {
     if(event.key === "Enter"){
         event.preventDefault();
         btn8.click();
@@ -594,14 +596,15 @@ function updateTime(){
     let month = (now.getMonth() + 1).toString().padStart(2, 0);
     let date = now.getDate().toString().padStart(2, 0);
     let year = now.getFullYear();
-    let day = days[now.getDay()]
+    let day = days[now.getDay()];
 
-    let hour = now.getHours();
+    let hour = 0;
     let mins = now.getMinutes().toString().padStart(2, 0);
     let secs = now.getSeconds().toString().padStart(2, 0);
 
     let meridem = (hour >= 12) ? "P.M." : "A.M.";
-    let mHour = (hour > 12) ? (hour % 12).toString().padStart(2, 0) : (hour != 0) ? hour.toString().padStart(2, 0) : hour = 12;
+    let mHour = hour % 12 || 12;
+    //let mHour = (hour > 12) ? (hour % 12).toString().padStart(2, 0) : (hour != 0) ? hour.toString().padStart(2, 0) : hour = 12;
     //mHour = mHour.toString().padStart(2, 0);
     clock.textContent = `${year}-${month}-${date}, ${day} - ${mHour}:${mins}:${secs} ${meridem}`;
 }
@@ -682,3 +685,62 @@ function toCallback(){
     setTimeout(() => console.log("Fourth call!"), 4000);
 }
 toCall(toCallback);
+
+
+//ELEMENT SELECTORS SECTION
+const helloH1 = document.getElementById("hello");
+helloH1.style.backgroundColor = "yellow";
+const colors = document.getElementsByClassName("colors");
+function colorInterval(colors){
+    setTimeout(() => colors[0].style.backgroundColor = colors[0].textContent.toLowerCase(), 100);
+    setTimeout(() => colors[0].style.backgroundColor = "white", 200);
+    setTimeout(() => colors[1].style.backgroundColor = colors[1].textContent.toLowerCase(), 300);
+    setTimeout(() => colors[1].style.backgroundColor = "white", 400);
+    setTimeout(() => colors[2].style.backgroundColor = colors[2].textContent.toLowerCase(), 500);
+    setTimeout(() => colors[2].style.backgroundColor = "white", 600);
+    console.log("I got called!");
+}
+colorInterval(colors);
+setInterval(colorInterval, 600, colors);
+console.log(colors);
+
+
+//ADD & CHANGE HTML ELEMENT SECTION
+const newH1Element = document.createElement("h1");
+newH1Element.textContent = "I WILL DISAPPEAR IN 3 SECONDS AFTER YOU RELOAD THIS PAGE!";
+document.getElementById("rgbDiv").insertBefore(newH1Element, document.getElementById("hello"));
+setTimeout(() => document.getElementById("rgbDiv").removeChild(newH1Element), 3000);
+
+
+//KEY EVENTS SECTION
+const moveArrow = document.getElementById("arrow");
+const moveDistance = 10;
+let x = 0;
+let y = 0;
+document.addEventListener("keydown", (event) => {
+    event.preventDefault();
+    if (!event.key.startsWith("Arrow")){
+        return;
+    }
+    console.log(event.key);
+    switch(event.key){
+        case "ArrowUp":
+            y -= moveDistance;
+            moveArrow.innerHTML = `<img src="images/${event.key}.png">`;
+            break;
+        case "ArrowDown":
+            y += moveDistance;
+            moveArrow.innerHTML = `<img src="images/${event.key}.png">`;
+            break;
+        case "ArrowLeft":
+            x -= moveDistance;
+            moveArrow.innerHTML = `<img src="images/${event.key}.png">`;
+            break;
+        case "ArrowRight":
+            x += moveDistance;
+            moveArrow.innerHTML = `<img src="images/${event.key}.png">`;
+            break;
+    }
+    moveArrow.style.top = `${y}px`;
+    moveArrow.style.left = `${x}px`;
+});
