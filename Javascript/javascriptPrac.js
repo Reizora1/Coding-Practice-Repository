@@ -8,8 +8,7 @@ console.log("LOREM IPSUM SECTION:");
 let loop = 0;
 const btn1 = document.getElementById("btn1");
 btn1.addEventListener("click", function(event){
-    console.log(event);
-    event.target.textContent = "EH?";
+    console.log(event.target.textContent);
     if(loop == 0){
         document.getElementById("p1").textContent = "Hi! My Name is Jefter.";
         loop++;
@@ -358,7 +357,6 @@ const userInputDisplay = document.getElementById("userInputDisplay");
 let toSort = [];
 const start = 0;
 let end = 0;
-
 userInput.addEventListener("keyup", (event) => {
     if(event.key === "Enter"){
         event.preventDefault();
@@ -598,14 +596,14 @@ function updateTime(){
     let year = now.getFullYear();
     let day = days[now.getDay()];
 
-    let hour = 0;
+    let hour = now.getHours()
     let mins = now.getMinutes().toString().padStart(2, 0);
     let secs = now.getSeconds().toString().padStart(2, 0);
 
     let meridem = (hour >= 12) ? "P.M." : "A.M.";
     let mHour = hour % 12 || 12;
     //let mHour = (hour > 12) ? (hour % 12).toString().padStart(2, 0) : (hour != 0) ? hour.toString().padStart(2, 0) : hour = 12;
-    //mHour = mHour.toString().padStart(2, 0);
+    mHour = mHour.toString().padStart(2, 0);
     clock.textContent = `${year}-${month}-${date}, ${day} - ${mHour}:${mins}:${secs} ${meridem}`;
 }
 updateTime();
@@ -744,3 +742,70 @@ document.addEventListener("keydown", (event) => {
     moveArrow.style.top = `${y}px`;
     moveArrow.style.left = `${x}px`;
 });
+
+
+//HIDE SHOW HTML SECTION
+const hideBtn = document.getElementById("hide");
+hideBtn.addEventListener("click", () => {
+    if(document.body.style.visibility !== "hidden"){
+        document.body.style.visibility = "hidden";
+        hideBtn.style.visibility = "visible";
+        hideBtn.textContent = "SHOW ALL";
+    }
+    else{
+        document.body.style.visibility = "visible";
+        hideBtn.textContent = "HIDE ALL";
+    }
+});
+
+
+//NODELIST SECTION
+let btnCollection = document.querySelectorAll("button");
+btnCollection.forEach((element) => {
+    element.style.backgroundColor = "aqua";
+    element.addEventListener("mouseover", (event) =>{
+        event.target.style.backgroundColor = "gray";
+    });
+});
+btnCollection.forEach((element) => {
+    element.addEventListener("mouseout", (event) =>{
+        event.target.style.backgroundColor = "aqua";
+    });
+})
+
+
+//CALLBACK HELL SECTION
+
+function call1(callback){
+    setTimeout(() => {
+        console.log("Call#1");
+        callback();
+    }, 3500);
+}
+function call2(callback){
+    setTimeout(() => {
+        console.log("Call#2");
+        callback();
+    }, 500);
+}
+function call3(callback){
+    setTimeout(() => {
+        console.log("Call#3");
+        callback();
+    }, 5000);
+}
+function call4(callback){
+    setTimeout(() => {
+        console.log("Call#4");
+        callback();
+    }, 2000);
+}
+call1(() =>{
+    call2(() => {
+        call3(() => {
+            call4(() => {
+                setTimeout(() => console.log("All calls completed"), 13000);
+            });
+        })
+    })
+})
